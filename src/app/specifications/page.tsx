@@ -4,7 +4,7 @@ import { SiteFooter, SiteNavigation } from "@/components/site-navigation";
 import { SpecificationShowcase } from "@/components/specification-showcase";
 
 export const metadata: Metadata = {
-  title: "Vehicle | Anargya Racing",
+  title: "Vehicle | Anargya",
   description: "Explore the Anargya Formula Student EV concept, available vehicle information and interactive 3D component guide.",
 };
 
@@ -21,14 +21,14 @@ export default function SpecificationsPage() {
       <ParallaxLayer className="orb orb--blue orb-a" y={160} />
       <ParallaxLayer className="orb orb--pink orb-b" y={-110} />
       <Parallax y={-30}><div className="specification-heading"><Reveal><p className="page-eyebrow">Vehicle / Overview</p></Reveal>
-        <SplitReveal as="h1" lines={["Every system,", <em key="t">built to teach.</em>]} />
+        <SplitReveal as="h1" lines={["Precision in", <em key="t">every detail.</em>]} />
         <Reveal delay={0.4}><p className="page-lede" lang="ja" style={{ color: "#9ebcff", marginTop: "1rem" }}>すべてのシステムを、ドライバー育成のために。</p>
         <p className="page-lede">Pick a system and the camera flies straight to it. Chassis, suspension, cockpit, wheels and aero are all explorable in the 3D model; the powertrain, inverter and software are developed alongside them.</p></Reveal>
       </div></Parallax>
       <Parallax y={40}><Reveal delay={0.5} className="specification-fact"><span>Intended for</span><strong>Racing<br />academies</strong><span>Initial market / Japan</span></Reveal></Parallax>
     </section>
     <section className="specification-explorer" aria-labelledby="explorer-title">
-      <Reveal><div className="explorer-heading"><div><p className="page-eyebrow">Interactive 3D / Component guide</p><h2 id="explorer-title">Pick a system. Fly right to it.</h2></div><p>Select a system and the camera zooms to it while its parts light up. The powertrain, inverter and software are part of the development scope; they are not shown as separate components here.</p></div></Reveal>
+      <Reveal><div className="explorer-heading"><div><p className="page-eyebrow">Interactive 3D / Component guide</p><h2 id="explorer-title">The future of electric mobility starts with the right parts.</h2></div><p>Select a system and the camera zooms to it while its parts light up. The powertrain, inverter and software are part of the development scope; they are not shown as separate components here.</p></div></Reveal>
       <Reveal delay={0.1}><SpecificationShowcase /></Reveal>
       <p className="specification-note">Motor output, torque, battery capacity, vehicle mass, dimensions and top speed are not yet available as validated specifications.</p>
     </section>

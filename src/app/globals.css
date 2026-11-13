@@ -16,7 +16,6 @@
   --font-display: "Helvetica Neue", Helvetica, var(--font-inter), Arial, sans-serif;
   --font-body: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
 }
-
 @theme inline {
   --color-background: var(--carbon);
   --color-foreground: var(--white);
@@ -1122,7 +1121,7 @@ canvas {
 .hero-banner-copy h1 { margin:0; max-width: 10ch; font-family:var(--font-display); font-size:clamp(3.8rem,8.6vw,9rem); font-weight:800; letter-spacing:-.065em; line-height:.88; text-transform:uppercase; }
 .hero-banner-copy .button-secondary { margin-top:2rem; }
 .hero-banner-note { position:absolute; z-index:1; right:clamp(1.25rem,5vw,5rem); bottom:2rem; color:var(--muted-on-dark); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; }
-.vehicle-sequence { height:600vh; height:600svh; min-height:0; }
+.vehicle-sequence { height:500vh; height:500svh; min-height:0; }
 .sequence-sticky { min-height:0; }
 .feature-panel { justify-content:flex-start; align-items:center; padding:7rem clamp(1.25rem,7vw,7rem) 5rem; }
 .feature-copy { width:min(40%, 490px); max-width:490px; margin:0; padding:1rem 1.5rem 1rem 0; border:0; background:linear-gradient(90deg,rgba(8,10,13,.88),rgba(8,10,13,.5) 75%,transparent); }
@@ -1144,7 +1143,7 @@ canvas {
  .hero-banner { min-height:100svh; align-items:flex-end; padding:7rem 1.25rem 6rem; }
  .hero-banner-copy h1 { font-size:clamp(3.2rem,13vw,5.6rem); }
  .hero-banner-note { right:1.25rem; bottom:1.4rem; font-size:.58rem; }
- .vehicle-sequence { height:600svh; min-height:0; }
+ .vehicle-sequence { height:500svh; min-height:0; }
  .sequence-sticky { min-height:0; }
  .scene-backdrop { background:linear-gradient(0deg,rgba(8,10,13,.98) 0%,rgba(8,10,13,.78) 47%,rgba(8,10,13,.03) 75%),radial-gradient(ellipse at 62% 30%,rgba(115,128,148,.18),transparent 48%); }
  .feature-panel { align-items:flex-end; padding:7rem 1.1rem 5.7rem; }
@@ -1438,7 +1437,7 @@ canvas {
 .site-footer-nav a:hover { color:#9ebcff; }
 .site-footer-bottom { display:flex; justify-content:space-between; gap:1rem; max-width:1440px; margin:0 auto; border-top:1px solid rgba(243,242,239,.2); padding:1.15rem 0; color:#aeb6c4; font-size:.63rem; letter-spacing:.12em; }
 @media(max-width:760px) {
- .vehicle-sequence { height:600svh; min-height:0; }
+ .vehicle-sequence { height:500svh; min-height:0; }
  .site-footer { padding-inline:1.25rem; }
  .site-footer-main { grid-template-columns:1fr; gap:2.5rem; padding:3rem 0; }
  .site-footer-nav { grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:2rem; }

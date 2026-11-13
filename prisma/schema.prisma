@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
+}
+
+enum OrganizationKind {
+  ACADEMY
+  TEAM
+  OTHER
+}
+
+enum InquiryKind {
+  QUESTION
+  FEEDBACK
+  PRESENTATION
+  EVALUATION
+  FLEET
+  TELEMETRY
+  OTHER
+}
+
+enum InquiryStatus {
+  NEW
+  CONTACTED
+  CLOSED
+}
+
+enum ProposalStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+  CANCELLED
+}
+
+/// A racing academy or independent team that buys or evaluates the vehicle.
+model Organization {
+  id        String           @id @default(cuid())
+  name      String
+  kind      OrganizationKind @default(ACADEMY)
+  country   String           @default("Japan")
+  createdAt DateTime         @default(now())
+
+  users     User[]
+  vehicles  Vehicle[]
+  proposals Proposal[]
+}
+
+model User {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  name           String
+  passwordHash   String
+  role           Role     @default(CUSTOMER)
+  organizationId String?
+  createdAt      DateTime @default(now())
+
+  organization Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  proposals    Proposal[]
+
+  @@index([organizationId])
+}
+
+/// One physical car. The telemetry unit authenticates with an API key; only its hash is stored.
+model Vehicle {
+  id             String   @id @default(cuid())
+  serial         String   @unique
+  name           String
+  model          String   @default("Formula Student EV")
+  telemetryEnabled Boolean @default(false)
+  apiKeyHash     String?  @unique
+  organizationId String?
+  createdAt      DateTime @default(now())
+
+  organization Organization?       @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  sessions     TelemetrySession[]
+
+  @@index([organizationId])
+}
+
+model TelemetrySession {
+  id         String    @id @default(cuid())
+  vehicleId  String
+  driverName String?
+  startedAt  DateTime  @default(now())
+  endedAt    DateTime?
+
+  vehicle  Vehicle            @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  readings TelemetryReading[]
+
+  @@index([vehicleId, startedAt])
+}
+
+/// One sample from the car. Every channel is optional because units may report a subset.
+model TelemetryReading {
+  id           Int      @id @default(autoincrement())
+  sessionId    String
+  recordedAt   DateTime
+  speedKmh     Float?
+  wheelSpeedFl Float?
+  wheelSpeedFr Float?
+  wheelSpeedRl Float?
+  wheelSpeedRr Float?
+  voltageV     Float?
+  currentA     Float?
+  batteryPct   Float?
+  motorTempC   Float?
+  inverterTempC Float?
+  batteryTempC Float?
+  latitude     Float?
+  longitude    Float?
+
+  session TelemetrySession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId, recordedAt])
+}
+
+/// Public contact / enquiry form submissions, handled by the sales team.
+model Inquiry {
+  id           String        @id @default(cuid())
+  name         String
+  organization String
+  email        String
+  kind         InquiryKind   @default(OTHER)
+  message      String
+  status       InquiryStatus @default(NEW)
+  createdAt    DateTime      @default(now())
+
+  @@index([status, createdAt])
+}
+
+/// Editable site content (price, roadmap, profile, system list...) stored as JSON by key.
+model ContentItem {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+/// A written proposal for a quantity of vehicles. Price is per vehicle, in yen.
+model Proposal {
+  id             String         @id @default(cuid())
+  number         String         @unique
+  organizationId String
+  requestedById  String?
+  quantity       Int
+  unitPriceYen   Int
+  depositPercent Int?
+  status         ProposalStatus @default(DRAFT)
+  notes          String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  requestedBy  User?        @relation(fields: [requestedById], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, status])
+}

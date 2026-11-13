@@ -174,3 +174,12 @@ html.has-custom-cursor :is(input, textarea, select, [contenteditable="true"]) { 
   .eyebrow-dot { animation: none; }
 }
 .hero-actions .button-secondary span { margin-left: 0.5rem; }
+
+/* Footer lockup: the new logo beside the existing ANARGYA lettering. */
+.footer-lockup { display: flex; align-items: center; gap: 1.1rem; }
+.site-footer-brand .footer-logo { width: clamp(64px, 6vw, 84px); height: auto; flex: none; }
+.site-footer-brand .footer-wordtext { width: clamp(130px, 12vw, 170px); height: auto; flex: none; }
+
+/* Header logo: the new mark has a wider shape and dark ribbon, so it is set a little larger. */
+.brand-mark { width: 58px; height: 36px; }
+@media (max-width: 680px) { .brand-mark { width: 48px; height: 30px; } }

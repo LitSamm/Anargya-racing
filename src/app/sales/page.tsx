@@ -3,7 +3,7 @@ import { CountUp, DrawLine, GhostWord, GrowBar, Parallax, ParallaxLayer, Reveal,
 import { SiteFooter, SiteNavigation } from "@/components/site-navigation";
 
 export const metadata: Metadata = {
-  title: "Sales Information | Anargya Racing",
+  title: "Sales Information | Anargya",
   description: "Sales information and Japan market plan for the Anargya Formula Student EV concept.",
 };
 
@@ -23,18 +23,17 @@ export default function SalesPage() {
       <Parallax y={-30}><div className="sales-heading"><Reveal><p className="page-eyebrow">Vehicle sales / Japan</p></Reveal>
         <SplitReveal as="h1" lines={["Your academy’s", "own Formula", <em key="ev">Student EV.</em>]} />
         <Reveal delay={0.4}><p className="page-lede" lang="ja" style={{ color: "#9ebcff", marginTop: "1rem" }}>アカデミー専用のフォーミュラ・スチューデントEVを、計画できる価格で。</p>
-        <p className="page-lede">An integrated electric stack for driver training, testing and performance research, with a stated price target, spare parts and service planned for Japan, and an optional live telemetry add-on.</p>
-        <a className="button-primary" href="/#contact">Contact sales</a></Reveal>
+        <p className="page-lede">An integrated electric stack for driver training, testing and performance research, with a fixed price, spare parts and service planned for Japan, and an optional live telemetry add-on.</p></Reveal>
       </div></Parallax>
-      <Parallax y={40}><Reveal delay={0.5} className="sales-price-block"><p className="page-eyebrow">Project target price / per vehicle</p><strong><CountUp value={6000000} prefix="¥" format="yen" /></strong>
-        <p>Project planning target, not a quotation. Final price, vehicle specification and availability require a written proposal.</p>
+      <Parallax y={40}><Reveal delay={0.5} className="sales-price-block"><p className="page-eyebrow">Price / per vehicle</p><strong><CountUp value={6627281} prefix="¥" format="yen" /></strong>
+        <p>Fixed price per vehicle. Vehicle specification and availability are confirmed in a written proposal.</p>
       </Reveal></Parallax>
     </section>
     <SectionCurtain className="sales-roadmap premium-dark" id="roadmap" labelledBy="roadmap-title">
       <GhostWord text="2031" />
       <Parallax y={-28}><div className="roadmap-heading">
         <Reveal><p className="page-eyebrow"><i className="eyebrow-dot" />Proposed market plan / 市場計画</p></Reveal>
-        <SplitReveal as="h2" id="roadmap-title" lines={["Five years,", <em key="g">one climb.</em>]} />
+        <SplitReveal as="h2" id="roadmap-title" lines={["Innovation that", <em key="g">moves us forward.</em>]} />
         <Reveal delay={0.3}><p>The schedule and vehicle volumes below are targets in the project plan. They are not confirmed production commitments; expansion depends on partner and market validation.</p></Reveal>
       </div></Parallax>
       <div className="roadmap-list">{roadmap.map((item, index) => <div className="roadmap-row" key={item.year}>
@@ -53,7 +52,6 @@ export default function SalesPage() {
       <Parallax y={24}><Reveal delay={0.25} className="sales-detail-copy"><p>The project plan proposes evaluating the vehicle with Japanese academies before expanding production. Its targets include feedback from at least five respondents across three academies and a 90% vehicle-quality approval rate. These are proposed targets, not achieved results.</p>
         <p>The proposed pilot model assumes a 30% deposit. Payment, cancellation and delivery terms would be confirmed in an individual sales agreement.</p>
         <a className="button-secondary" href="/specifications">View vehicle information</a>
-        <a className="text-link" href="/#contact">Prepare an inquiry <span aria-hidden="true">↗</span></a>
       </Reveal></Parallax>
     </SectionCurtain>
   </main><SiteFooter /></>;

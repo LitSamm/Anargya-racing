@@ -130,9 +130,6 @@ export function LiveTelemetrySection() {
           <Reveal delay={0.1 * index}><span className="live-feature-index">{String(index + 1).padStart(2, "0")}</span>
             <div><h3>{feature.en}</h3><p className="live-feature-ja" lang="ja">{feature.ja}</p><p>{feature.copy}</p></div></Reveal>
         </li>)}</ul>
-        <Reveal delay={0.2}><div className="live-actions">
-          <a className="button-primary" href="/#contact">Ask about the telemetry add-on <span aria-hidden="true">→</span></a>
-        </div></Reveal>
       </div>
 
       <div className="live-stage" ref={stageRef} role="img" aria-label="Preview of the Anargya live telemetry app on a laptop and a phone, showing simulated readings">

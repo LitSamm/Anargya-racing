@@ -1,8 +1,8 @@
-# Anargya Racing
+# Anargya
 
-Website Anargya Racing memperkenalkan konsep mobil listrik Formula Student untuk pelatihan pembalap dan riset kendaraan. Situs ini menjelaskan tujuan kendaraan, sistem yang dikembangkan, rencana penjualan untuk akademi balap di Jepang, serta konsep aplikasi telemetry.
+Website Anargya memperkenalkan konsep mobil listrik Formula Student untuk pelatihan pembalap dan riset kendaraan. Situs ini menjelaskan tujuan kendaraan, sistem yang dikembangkan, rencana penjualan untuk akademi balap di Jepang, serta konsep aplikasi telemetry.
 
-Informasi harga, volume, dan jadwal di situs merupakan target dalam rencana proyek, bukan penawaran atau komitmen produksi. Spesifikasi performa kendaraan belum dipublikasikan sebagai data tervalidasi.
+Harga kendaraan ¥6.627.281 adalah harga tetap. Volume dan jadwal di situs merupakan target dalam rencana proyek, bukan komitmen produksi. Spesifikasi performa kendaraan belum dipublikasikan sebagai data tervalidasi.
 
 ## Isi situs
 
@@ -26,7 +26,7 @@ Pemilihan sistem mengubah sorotan komponen dan sudut kamera. Powertrain, inverte
 
 ### Informasi penjualan
 
-`/sales` menjelaskan arah penjualan yang direncanakan untuk Jepang, target harga proyek per kendaraan, rencana ekspansi pasar, dan gagasan pilot untuk akademi. Angka serta tanggal di halaman ini merupakan asumsi atau target perencanaan. Harga final, spesifikasi, ketersediaan, dan ketentuan pembelian perlu dikonfirmasi melalui proposal atau perjanjian penjualan.
+`/sales` menjelaskan arah penjualan yang direncanakan untuk Jepang, harga tetap per kendaraan (¥6.627.281), rencana ekspansi pasar, dan gagasan pilot untuk akademi. Angka serta tanggal di halaman ini merupakan asumsi atau target perencanaan. Harga final, spesifikasi, ketersediaan, dan ketentuan pembelian perlu dikonfirmasi melalui proposal atau perjanjian penjualan.
 
 ### Pratinjau live telemetry
 
@@ -82,7 +82,7 @@ npm run start
 
 | Rute | Isi |
 | --- | --- |
-| `/` | Pengenalan Anargya Racing, model kendaraan 3D, formulir kontak, dan pratinjau telemetry |
+| `/` | Pengenalan Anargya, model kendaraan 3D, formulir kontak, dan pratinjau telemetry |
 | `/specifications` | Penjelasan kendaraan dan penjelajah komponen 3D |
 | `/sales` | Informasi penjualan dan rencana pasar |
 
@@ -135,3 +135,34 @@ public/
 | `npm run lint` | Menjalankan ESLint |
 | `npm run build` | Membuat build produksi |
 | `npm run start` | Menjalankan server untuk build produksi |
+
+## Backend (Prisma + SQLite)
+
+Route handler API di `src/app/api`, database lewat Prisma 7 dengan SQLite (`dev.db`).
+
+### Menjalankan
+```bash
+cp .env.example .env        # isi AUTH_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD
+npm install                 # postinstall menjalankan prisma generate
+npm run db:migrate          # membuat tabel
+npm run db:seed             # admin, konten awal, dan satu kendaraan demo
+npm run dev
+```
+`npm run db:studio` membuka penjelajah data. Untuk produksi, ganti provider di `prisma/schema.prisma` ke PostgreSQL dan adapter-nya; hosting statis tidak bisa menjalankan database.
+
+### Endpoint
+| Endpoint | Akses | Fungsi |
+|---|---|---|
+| `POST /api/auth/login`, `/logout`, `GET /api/auth/me` | publik / sesi | Login dengan cookie sesi (JWT, httpOnly) |
+| `GET/POST /api/users` | admin | Akun dibuat admin; tidak ada pendaftaran publik |
+| `GET/POST /api/organizations` | admin | Akademi / tim |
+| `GET/POST /api/vehicles`, `POST /api/vehicles/:id/api-key` | admin; pelanggan lihat milik organisasinya | Kendaraan dan kunci telemetry (ditampilkan sekali) |
+| `POST /api/telemetry/sessions`, `POST /api/telemetry/readings`, `PATCH /api/telemetry/sessions/:id` | unit mobil (`x-vehicle-key`) | Mulai sesi, unggah hingga 500 pembacaan, tutup sesi |
+| `GET /api/telemetry/sessions`, `GET /api/telemetry/sessions/:id` | pelanggan (organisasinya) / admin | Riwayat sesi dan pembacaan |
+| `POST /api/inquiries` | publik (dibatasi laju, honeypot `website`) | Pesan dari formulir kontak |
+| `GET /api/inquiries`, `PATCH /api/inquiries/:id` | admin | Daftar dan status pesan |
+| `GET /api/content`, `GET /api/content/:key` | publik | Konten situs (harga, profil, roadmap) |
+| `PUT/DELETE /api/content/:key` | admin | Ubah konten tanpa edit kode |
+| `GET/POST /api/proposals`, `PATCH /api/proposals/:id` | pelanggan / admin | Proposal; harga selalu ditetapkan server dari `vehicle.priceYen` |
+
+Frontend belum memakai API ini: formulir kontak dan halaman telemetry di situs masih seperti sebelumnya.

@@ -26,7 +26,7 @@ type CarSceneProps = {
 };
 
 /**
- * One keyframe per scroll chapter (5 feature chapters + the contact panel).
+ * One keyframe per scroll chapter (5 feature chapters).
  * `side` is where the car sits on screen: +1 = right (copy is on the left),
  * -1 = left (copy is on the right). Chapter copy alternates left/right in
  * landing-page.tsx, so the car always moves into the open half of the screen.
@@ -37,7 +37,6 @@ const chapterFrames = [
   { position: new Vector3(-5.9, 1.5, 5.3), target: new Vector3(0, 0.1, 0), fov: 30, side: 1 },
   { position: new Vector3(4.6, 3.9, 6.1), target: new Vector3(0, 0, 0), fov: 33, side: -1 },
   { position: new Vector3(-1.6, 0.9, 6.9), target: new Vector3(0, 0.15, 0), fov: 29, side: 1 },
-  { position: new Vector3(6.4, 2.3, 7.2), target: new Vector3(0, 0.1, 0), fov: 34, side: -1 },
 ];
 
 const CHAPTERS = chapterFrames.length;
