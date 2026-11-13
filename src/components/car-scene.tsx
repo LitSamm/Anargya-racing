@@ -40,6 +40,8 @@ const chapterFrames = [
 ];
 
 const CHAPTERS = chapterFrames.length;
+/** Materials whose texture genuinely has transparent pixels (logo decal, leather/headrest cut-outs). */
+const REAL_ALPHA = new Set(["Material Carbon fibre", "Material Air Filter", "Material handle", "Material Headrest"]);
 const SCREEN_SHIFT = 0.36; // fraction of the half-width the car is pushed off-centre
 const ACCENT_PINK = "#f20c62";
 const ACCENT_BLUE = "#1768f5";
@@ -151,6 +153,17 @@ function VehicleModel({
         meshCount += 1;
         object.castShadow = true;
         object.receiveShadow = true;
+        // The Blender export marks almost every material as alpha-blended although only a few
+        // textures really carry transparency. Blended panels look see-through and are sorted
+        // back to front, so make the solid ones opaque.
+        const list = Array.isArray(object.material) ? object.material : [object.material];
+        for (const material of list) {
+          if (material.name && !REAL_ALPHA.has(material.name)) {
+            material.transparent = false;
+            material.depthWrite = true;
+            material.alphaTest = 0;
+          }
+        }
       }
     });
 
@@ -338,7 +351,7 @@ function VehicleModel({
       {/* Polished showroom floor: reflects the car and fades into darkness with the fog. */}
       <mesh position={[0, floorY - 0.004, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <circleGeometry args={[45, 48]} />
-        <meshStandardMaterial color="#14171c" roughness={0.38} metalness={0.6} envMapIntensity={0.7} />
+        <meshStandardMaterial color="#0b0d11" roughness={1} metalness={0} envMapIntensity={0} />
       </mesh>
       {/* A thin, quiet light line on the floor marks the presentation spot. */}
       <group ref={floor} position={[0, floorY + 0.004, 0]} rotation={[-Math.PI / 2, 0, 0]}>
