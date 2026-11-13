@@ -1,0 +1,93 @@
+/* ===== Japan marketing pass: bilingual type, livelier hero, USP section ===== */
+:root { --font-ja: "Helvetica Neue", Helvetica, var(--font-inter), "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif; }
+[lang="ja"] { font-family: var(--font-ja); letter-spacing: 0; }
+
+/* The car now moves into the open half of the screen, so the old one-sided wash is replaced. */
+.scene-backdrop {
+  background:
+    radial-gradient(ellipse at 50% 55%, rgba(115,128,148,.16), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(23,104,245,.1), transparent 50%);
+}
+.feature-ja { margin: .9rem 0 0; color: #dfe8ff; font-size: clamp(.82rem,1vw,.98rem); font-weight: 700; line-height: 1.6; }
+.feature-panel[data-side="right"] .feature-ja { margin-left: auto; }
+.feature-title { text-wrap: balance; }
+.feature-meta span { position: relative; padding-left: .85rem; }
+.feature-meta span::before { position: absolute; top: .45em; left: 0; width: 5px; height: 5px; content: ""; background: var(--pink); }
+.feature-panel[data-side="right"] .feature-meta span { padding-left: 0; padding-right: .85rem; }
+.feature-panel[data-side="right"] .feature-meta span::before { right: 0; left: auto; }
+
+.sequence-bar { position: absolute; z-index: 8; right: 0; bottom: 0; left: 0; height: 3px; background: rgba(243,242,239,.12); }
+.sequence-bar span { display: block; height: 100%; transform-origin: left; background: linear-gradient(90deg, var(--blue), var(--pink)); }
+
+/* Hero */
+.hero-banner-copy h1 { font-size: clamp(3.4rem, 8vw, 8.6rem); }
+.hero-banner-copy h1 em { background-image: linear-gradient(95deg, #dce8ff 0%, #3f7bf0 40%, #f20c62 70%, #dce8ff 100%); background-size: 200% 100%; animation: shimmer 5s linear infinite; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+.hero-ja { max-width: 40ch; text-wrap: balance; word-break: keep-all; margin: 1.6rem 0 0; color: #dfe8ff; font-size: clamp(1.05rem,1.7vw,1.5rem); font-weight: 700; line-height: 1.5; }
+.hero-lede { max-width: 46ch; margin: .9rem 0 0; color: var(--muted-on-dark); font-size: clamp(.95rem,1.15vw,1.1rem); line-height: 1.7; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+.hero-actions .button-secondary { margin-top: 0; }
+.hero-actions .button-primary span { margin-left: .5rem; transition: transform 180ms ease; }
+.hero-actions .button-primary:hover span { transform: translateX(4px); }
+.hero-banner-copy { z-index: 2; }
+.hero-streaks { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
+.hero-streaks span { position: absolute; left: -40%; width: 40%; height: 2px; opacity: 0; background: linear-gradient(90deg, transparent, var(--blue), #dce8ff); animation: streak 4.8s cubic-bezier(.4,0,.2,1) infinite; }
+.hero-streaks span:nth-child(1) { top: 22%; animation-delay: .2s; }
+.hero-streaks span:nth-child(2) { top: 38%; width: 55%; animation-delay: 1.4s; background: linear-gradient(90deg, transparent, var(--pink), #ffd5e4); }
+.hero-streaks span:nth-child(3) { top: 54%; animation-delay: 2.5s; }
+.hero-streaks span:nth-child(4) { top: 69%; width: 30%; animation-delay: 3.3s; background: linear-gradient(90deg, transparent, var(--pink), #ffd5e4); }
+.hero-streaks span:nth-child(5) { top: 82%; width: 50%; animation-delay: .9s; }
+@keyframes streak { 0% { transform: translateX(0); opacity: 0; } 12% { opacity: .9; } 60% { opacity: .5; } 100% { transform: translateX(380%); opacity: 0; } }
+.hero-scroll { position: absolute; z-index: 2; bottom: 2rem; left: 50%; width: 22px; height: 36px; border: 1px solid rgba(243,242,239,.5); border-radius: 12px; }
+.hero-scroll i { position: absolute; top: 6px; left: 50%; width: 3px; height: 7px; margin-left: -1.5px; border-radius: 2px; background: var(--white); animation: scroll-dot 1.8s ease-in-out infinite; }
+@keyframes scroll-dot { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(12px); opacity: 0; } 100% { opacity: 0; } }
+
+/* Ticker */
+.ticker { position: relative; overflow: hidden; border-block: 1px solid var(--line-dark); background: #0b0d10; padding: 1rem 0; }
+.ticker-track { display: flex; width: max-content; animation: ticker 38s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker span { display: inline-flex; align-items: center; gap: 2rem; padding-right: 2rem; color: #d2d8e2; font-family: var(--font-display); font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.ticker span[lang="ja"] { color: #9ebcff; letter-spacing: .08em; }
+.ticker i { width: 7px; height: 7px; background: var(--pink); transform: rotate(45deg); }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* Why Anargya */
+.why-section { position: relative; padding: clamp(5rem,11vw,11rem) clamp(1.25rem,9vw,9rem); background: var(--paper); color: var(--ink); overflow: hidden; }
+.why-section .page-eyebrow { color: #48566c; }
+.why-title { max-width: 16ch; margin: 0; font-family: var(--font-display); font-size: clamp(2.6rem,6vw,6.2rem); font-weight: 800; letter-spacing: -.055em; line-height: .94; text-transform: uppercase; text-wrap: balance; }
+.why-title em { color: #0c55d7; font-style: normal; }
+.why-ja { max-width: 36ch; margin: 1.3rem 0 0; color: var(--muted-on-light); font-size: clamp(.95rem,1.3vw,1.15rem); font-weight: 700; line-height: 1.6; }
+.why-lede { max-width: 56ch; margin: 1.2rem 0 0; color: var(--muted-on-light); font-size: clamp(.95rem,1.2vw,1.08rem); line-height: 1.75; }
+.stat-row { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); margin: clamp(3rem,6vw,5.5rem) 0; border-block: 1px solid var(--line-light); }
+.stat { display: grid; align-content: start; gap: .4rem; padding: 2rem 1.5rem 2rem 0; }
+.stat + .stat { padding-left: 1.5rem; border-left: 1px solid var(--line-light); }
+.stat strong { color: #0c55d7; font-family: var(--font-display); font-size: clamp(2.2rem,4.6vw,4.8rem); font-variant-numeric: tabular-nums; font-weight: 800; letter-spacing: -.06em; line-height: 1; }
+.advantage-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1rem; }
+.advantage { position: relative; display: flex; flex-direction: column; gap: .5rem; min-height: 280px; padding: 1.6rem; border: 1px solid var(--line-light); background: rgba(255,255,255,.4); transition: transform 280ms ease, border-color 280ms ease, background 280ms ease, box-shadow 280ms ease; }
+.advantage::before { position: absolute; inset: 0 0 auto; height: 3px; content: ""; transform: scaleX(0); transform-origin: left; background: linear-gradient(90deg, var(--blue), var(--pink)); transition: transform 380ms ease; }
+.advantage:hover { transform: translateY(-6px); border-color: #0c55d7; background: #fff; box-shadow: 0 18px 40px rgba(16,18,22,.12); }
+.advantage:hover::before { transform: scaleX(1); }
+.advantage-index { color: #0c55d7; font-size: .7rem; font-variant-numeric: tabular-nums; }
+.advantage h3 { margin: 1.4rem 0 0; font-family: var(--font-display); font-size: 1.35rem; letter-spacing: -.025em; line-height: 1.1; text-transform: uppercase; }
+.advantage p { margin: 0; color: var(--muted-on-light); font-size: .86rem; line-height: 1.65; }
+.advantage .advantage-ja { color: #0c55d7; font-size: .8rem; font-weight: 700; }
+.why-note { max-width: 70ch; margin: 2rem 0 0; color: var(--muted-on-light); font-size: .72rem; line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .advantage-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 680px) {
+  .hero-banner-copy h1 { font-size: clamp(3rem,12.5vw,5rem); }
+  .hero-ja { font-size: 1rem; }
+  .hero-actions .button-primary, .hero-actions .button-secondary { flex: 1 1 100%; }
+  .hero-scroll { display: none; }
+  .feature-ja { font-size: .8rem; margin-top: .55rem; }
+  .why-section { padding: 4.5rem 1.25rem; }
+  .advantage-grid { grid-template-columns: 1fr; }
+  .advantage { min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-streaks, .hero-scroll { display: none; }
+  .ticker-track { animation: none; }
+  .hero-banner-copy h1 em { animation: none; }
+}

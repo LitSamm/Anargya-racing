@@ -1,0 +1,81 @@
+/* ===== Balance pass: smaller headlines, one shared left edge, two-column heroes ===== */
+:root { --edge: clamp(1.25rem, 9vw, 9rem); }
+
+/* Landing hero: content centred vertically, meta pinned to the same right edge as the page. */
+.hero-banner { align-items: center; padding: 7rem var(--edge) 6rem; }
+.hero-banner-copy { max-width: 980px; }
+.hero-banner-copy h1 { max-width: none; font-size: clamp(2.6rem, 5.2vw, 5.4rem); letter-spacing: -0.05em; line-height: 0.95; }
+.hero-ja { margin-top: 1.4rem; font-size: clamp(1rem, 1.35vw, 1.3rem); }
+.hero-lede { max-width: 50ch; }
+.hero-banner-note { right: var(--edge); bottom: 2.2rem; white-space: nowrap; }
+
+/* Sales and Specifications heroes share one two-column structure. */
+.sales-hero,
+.specification-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+  min-height: calc(76svh - 76px);
+  padding: clamp(3.5rem, 7vw, 6.5rem) var(--edge);
+}
+.sales-heading,
+.specification-heading { max-width: none; }
+.sales-heading h1,
+.specification-heading h1 { max-width: none; font-size: clamp(2.4rem, 4.6vw, 4.8rem); letter-spacing: -0.05em; line-height: 0.97; }
+.sales-heading h1 .split-line,
+.specification-heading h1 .split-line { white-space: nowrap; }
+.sales-heading .page-eyebrow,
+.specification-heading .page-eyebrow { margin-bottom: 1.2rem; }
+.page-lede { max-width: 52ch; }
+
+/* Right-hand fact blocks: one shared look. */
+.sales-price-block,
+.specification-fact { display: grid; gap: 0.55rem; justify-self: end; width: 100%; max-width: 400px; margin: 0; padding: 1.5rem 0 0; border-top: 1px solid rgba(243, 242, 239, 0.34); }
+.specification-fact span { color: var(--muted-on-dark); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.specification-fact strong { font-family: var(--font-display); font-size: clamp(1.9rem, 3.2vw, 3.2rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; text-transform: uppercase; }
+.sales-price-block strong { font-size: clamp(2.6rem, 3.7vw, 4.2rem); letter-spacing: -0.05em; }
+.sales-price-block > p:last-child { max-width: 36ch; margin-top: 0.4rem; }
+
+/* Section titles */
+.why-title,
+.scope-title { font-size: clamp(2.2rem, 4.4vw, 4.6rem); line-height: 0.98; }
+.sales-roadmap .roadmap-heading h2 { font-size: clamp(2.2rem, 3.8vw, 4rem); }
+.sales-details h2 { font-size: clamp(2.2rem, 4vw, 4.2rem); }
+.explorer-heading h2 { font-size: clamp(1.9rem, 3.2vw, 3.2rem); }
+
+/* Specifications explorer shares the page edge with the hero above it. */
+.specification-explorer { padding-inline: var(--edge); }
+.explorer-heading,
+.spec-explorer,
+.specification-note { max-width: none; }
+.spec-explorer { grid-template-columns: minmax(240px, 300px) minmax(0, 1fr); }
+
+@media (max-width: 900px) {
+  .sales-hero,
+  .specification-hero { grid-template-columns: 1fr; min-height: 0; gap: 2rem; }
+  .sales-price-block,
+  .specification-fact { justify-self: start; max-width: 460px; }
+  .spec-explorer { grid-template-columns: 1fr; }
+}
+@media (max-width: 680px) {
+  .hero-banner { padding: 6.5rem 1.25rem 5.5rem; }
+  .hero-banner-copy h1 { font-size: clamp(2.3rem, 10.6vw, 3.6rem); }
+  .hero-banner-note { right: 1.25rem; left: 1.25rem; bottom: 1.4rem; white-space: normal; }
+  .sales-hero,
+  .specification-hero { padding: 3.2rem 1.25rem 3rem; }
+  .sales-heading h1,
+  .specification-heading h1 { font-size: clamp(2.2rem, 9.6vw, 3.4rem); }
+  .sales-heading h1 .split-line,
+  .specification-heading h1 .split-line { white-space: normal; }
+  .why-title, .scope-title { font-size: clamp(2.1rem, 9vw, 3rem); }
+  .sales-roadmap .roadmap-heading h2, .sales-details h2 { font-size: clamp(2.1rem, 9vw, 3rem); }
+}
+
+/* Fixes found while reviewing the balance pass. */
+.hero-banner .hero-banner-note { position: absolute; }
+.hero-banner-copy h1 + .hero-ja { margin-top: 1.5rem; }
+.sales-price-block strong span { font-size: inherit; letter-spacing: inherit; }
+.explorer-heading h2 { font-weight: 800; letter-spacing: -0.045em; word-spacing: 0.06em; }
+.sales-heading h1 + *, .specification-heading h1 + * { margin-top: 0; }
+.sales-heading .split-line:last-child, .specification-heading .split-line:last-child { margin-bottom: 0.4rem; }

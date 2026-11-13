@@ -1,0 +1,58 @@
+/* Specification explorer: part list on the left, large viewer on the right. */
+.specification-explorer { padding: 2.5rem clamp(1.25rem, 5vw, 5rem) 4.5rem; }
+.spec-explorer { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(260px, 340px) minmax(0, 1fr); gap: clamp(1rem, 2.4vw, 2.2rem); max-width: 1440px; margin: 0 auto; }
+
+.spec-parts { display: grid; align-content: start; border-top: 1px solid rgba(243,242,239,.18); }
+.spec-part { position: relative; display: grid; grid-template-columns: 2.1rem minmax(0,1fr) 1rem; align-items: center; gap: .6rem; width: 100%; min-height: 66px; border: 0; border-bottom: 1px solid rgba(243,242,239,.18); background: transparent; padding: .75rem .6rem .75rem .4rem; color: #c9d0dc; text-align: left; transition: color 200ms ease, background 200ms ease, padding 240ms ease; }
+.spec-part::before { position: absolute; inset: 0 auto 0 0; width: 3px; content: ""; transform: scaleY(0); background: linear-gradient(180deg, var(--blue), var(--pink)); transition: transform 260ms ease; }
+.spec-part-index { color: #88adf2; font-size: .65rem; font-variant-numeric: tabular-nums; }
+.spec-part-name { display: grid; gap: .15rem; }
+.spec-part-name strong { font-family: var(--font-display); font-size: 1.02rem; letter-spacing: -.02em; text-transform: uppercase; }
+.spec-part-name small { color: #8f99aa; font-size: .68rem; }
+.spec-part-arrow { opacity: 0; color: #9ebcff; transition: opacity 200ms ease, transform 200ms ease; transform: translateX(-6px); }
+.spec-part:hover { background: rgba(243,242,239,.05); color: #fff; padding-left: .8rem; }
+.spec-part:hover .spec-part-arrow { opacity: 1; transform: none; }
+.spec-part.is-selected { background: linear-gradient(90deg, rgba(23,104,245,.22), transparent); color: #fff; padding-left: .8rem; }
+.spec-part.is-selected::before { transform: scaleY(1); }
+.spec-part.is-selected .spec-part-arrow { opacity: 1; transform: none; }
+.spec-part.is-selected .spec-part-name small { color: #b6cfff; }
+
+.spec-stage { position: relative; min-width: 0; height: clamp(480px, 74vh, 760px); margin: 0; overflow: hidden; border: 1px solid rgba(243,242,239,.18); background: #080a0d; }
+.spec-stage .spec-vehicle-render { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; margin: 0; }
+.spec-stage .scene-canvas { position: absolute; inset: 0; }
+.spec-stage .scene-status { top: 1rem; right: 1rem; }
+.spec-hud i { position: absolute; z-index: 2; width: 18px; height: 18px; border: 0 solid rgba(158,188,255,.7); pointer-events: none; }
+.spec-hud i:nth-child(1) { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+.spec-hud i:nth-child(2) { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
+.spec-hud i:nth-child(3) { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
+.spec-hud i:nth-child(4) { right: 10px; bottom: 10px; border-width: 0 2px 2px 0; }
+
+.spec-card { position: absolute; z-index: 3; bottom: 1.2rem; left: 1.2rem; display: grid; gap: .35rem; width: min(380px, calc(100% - 2.4rem)); border: 1px solid rgba(243,242,239,.24); border-left: 3px solid var(--blue); background: rgba(8,10,13,.82); backdrop-filter: blur(8px); padding: 1rem 1.15rem 1.1rem; }
+.spec-card-count { color: #88adf2; font-size: .62rem; font-variant-numeric: tabular-nums; letter-spacing: .16em; }
+.spec-card-title { font-family: var(--font-display); font-size: clamp(1.4rem, 2.3vw, 2rem); letter-spacing: -.035em; line-height: 1; text-transform: uppercase; }
+.spec-card-ja { color: #dfe8ff; font-size: .82rem; font-weight: 700; }
+.spec-card-parts { margin-top: .35rem; color: #e1e5ec; font-size: .78rem; line-height: 1.5; }
+.spec-card-note { color: #aeb6c4; font-size: .74rem; line-height: 1.6; }
+
+.spec-controls { position: absolute; z-index: 3; right: 1.2rem; bottom: 1.2rem; display: flex; gap: .5rem; }
+.spec-controls button { display: inline-flex; min-width: 46px; min-height: 46px; align-items: center; justify-content: center; border: 1px solid rgba(243,242,239,.4); background: rgba(8,10,13,.78); padding: 0 .9rem; color: var(--white); font-size: .95rem; transition: background 180ms ease, color 180ms ease, border-color 180ms ease; }
+.spec-controls button:hover { border-color: var(--white); background: var(--white); color: var(--ink); }
+.spec-controls .spec-reset { font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; }
+
+@media (max-width: 900px) {
+  .spec-explorer { grid-template-columns: 1fr; }
+  .spec-stage { order: -1; height: clamp(380px, 62svh, 560px); }
+  .spec-parts { display: flex; overflow-x: auto; gap: .5rem; border: 0; padding-bottom: .4rem; scroll-snap-type: x proximity; }
+  .spec-part { flex: 0 0 auto; width: auto; min-height: 52px; grid-template-columns: auto auto; border: 1px solid rgba(243,242,239,.25); padding: .55rem .9rem; scroll-snap-align: start; }
+  .spec-part::before, .spec-part-arrow, .spec-part-name small { display: none; }
+  .spec-part:hover, .spec-part.is-selected { padding-left: .9rem; }
+  .spec-part.is-selected { border-color: #6da2ff; background: rgba(23,104,245,.28); }
+  .spec-part-name strong { font-size: .8rem; white-space: nowrap; }
+}
+@media (max-width: 680px) {
+  .specification-explorer { padding: 1.5rem 1rem 3rem; }
+  .spec-card { right: .7rem; bottom: .7rem; left: .7rem; width: auto; padding: .8rem .9rem; }
+  .spec-card-note { display: none; }
+  .spec-controls { top: .7rem; right: .7rem; bottom: auto; }
+  .spec-controls button { min-height: 42px; min-width: 42px; }
+}
