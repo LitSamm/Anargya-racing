@@ -23,10 +23,10 @@ export default function SalesPage() {
       <Parallax y={-30}><div className="sales-heading"><Reveal><p className="page-eyebrow">Vehicle sales / Japan</p></Reveal>
         <SplitReveal as="h1" lines={["Your academy’s", "own Formula", <em key="ev">Student EV.</em>]} />
         <Reveal delay={0.4}><p className="page-lede" lang="ja" style={{ color: "#9ebcff", marginTop: "1rem" }}>アカデミー専用のフォーミュラ・スチューデントEVを、計画できる価格で。</p>
-        <p className="page-lede">An integrated electric stack for driver training, testing and performance research, with a fixed price, spare parts and service planned for Japan, and an optional live telemetry add-on.</p></Reveal>
+        <p className="page-lede">An integrated electric stack for driver training, testing and performance research, with a clear price, spare parts and service planned for Japan, and an optional live telemetry add-on.</p></Reveal>
       </div></Parallax>
       <Parallax y={40}><Reveal delay={0.5} className="sales-price-block"><p className="page-eyebrow">Price / per vehicle</p><strong><CountUp value={6627281} prefix="¥" format="yen" /></strong>
-        <p>Fixed price per vehicle. Vehicle specification and availability are confirmed in a written proposal.</p>
+        <p>Vehicle specification and availability are confirmed in a written proposal.</p>
       </Reveal></Parallax>
     </section>
     <SectionCurtain className="sales-roadmap premium-dark" id="roadmap" labelledBy="roadmap-title">

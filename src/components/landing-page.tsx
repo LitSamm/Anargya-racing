@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 import { useRef, useState } from "react";
 import { CarScene } from "@/components/car-scene";
-import { DrawLine, GhostWord, Parallax, Reveal, SectionCurtain, SpotlightCard, SplitReveal, ease } from "@/components/motion-kit";
+import { DrawLine, GhostWord, Parallax, Reveal, SectionCurtain, SpotlightCard, SplitReveal } from "@/components/motion-kit";
 import { ContactSection } from "@/components/contact-section";
 import { LiveTelemetrySection } from "@/components/live-telemetry-section";
 import { SiteFooter, SiteNavigation } from "@/components/site-navigation";
@@ -19,7 +19,7 @@ import { SiteFooter, SiteNavigation } from "@/components/site-navigation";
  * figures (power, mass, top speed) are not validated yet, so they are never
  * stated. The selling points are the things the plan can already support:
  * one integrated EV stack, a training-first purpose, local parts/service,
- * a fixed price, and condition monitoring.
+ * a stated price, and condition monitoring.
  */
 const chapters = [
   {
@@ -55,8 +55,8 @@ const chapters = [
     title: "¥6,627,281 per car.",
     ja: "1台あたり662万7,281円。",
     description:
-      "A purpose-built training EV at a fixed price an academy can plan for. Specification and availability are confirmed in a written proposal.",
-    meta: ["Fixed price", "Per vehicle", "Proposal for details"],
+      "A purpose-built training EV at a price an academy can plan for. Specification and availability are confirmed in a written proposal.",
+    meta: ["Price", "Per vehicle", "Proposal for details"],
   },
   {
     id: "telemetry",
@@ -78,7 +78,7 @@ const advantages = [
   {
     en: "A price you can budget for",
     ja: "予算を立てられる価格",
-    copy: "A fixed ¥6,627,281 per car and a 30% deposit pilot model give your team real numbers to plan with.",
+    copy: "A ¥6,627,281 price per car and a 30% deposit pilot model give your team real numbers to plan with.",
   },
   {
     en: "Data after every session",
@@ -186,7 +186,7 @@ function FeaturedSection() {
       <span className="page-eyebrow">Featured product</span>
       <strong>Anargya Formula Student EV</strong>
       <span lang="ja">レーシングドライバーを育てるEV</span>
-      <p>¥6,627,281 per car. Fixed price.</p>
+      <p>¥6,627,281 per car.</p>
       <div className="hero-actions"><a className="button-primary" href="/specifications">View vehicle <span aria-hidden="true">→</span></a><a className="button-secondary" href="/sales">Sales information</a></div>
     </Reveal>
   </section>;

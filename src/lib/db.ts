@@ -5,7 +5,7 @@ import { PrismaClient } from "@/generated/prisma/client";
 /** Resolves `file:./x.db` from the project root so every entry point opens the same file. */
 export function databaseUrl() {
   const raw = process.env.DATABASE_URL ?? "file:./dev.db";
-  return raw.startsWith("file:") ? `file:${path.resolve(process.cwd(), raw.slice(5))}` : raw;
+  return raw.startsWith("file:") ? `file:${path.resolve(/*turbopackIgnore: true*/ process.cwd(), raw.slice(5))}` : raw;
 }
 
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };

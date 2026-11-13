@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { ContactShadows, Environment, Lightformer, MeshReflectorMaterial, Sparkles, useGLTF, useProgress } from "@react-three/drei";
+import { ContactShadows, Environment, Lightformer, Sparkles, useGLTF, useProgress } from "@react-three/drei";
 import { Component, Suspense, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
   Box3,
@@ -337,21 +337,8 @@ function VehicleModel({
       </group>
       {/* Polished showroom floor: reflects the car and fades into darkness with the fog. */}
       <mesh position={[0, floorY - 0.004, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-        <circleGeometry args={[45, 96]} />
-        <MeshReflectorMaterial
-          blur={[320, 90]}
-          resolution={512}
-          mixBlur={1}
-          mixStrength={34}
-          mixContrast={1.1}
-          roughness={1}
-          depthScale={1.1}
-          minDepthThreshold={0.4}
-          maxDepthThreshold={1.4}
-          color="#14171c"
-          metalness={0.55}
-          mirror={0.6}
-        />
+        <circleGeometry args={[45, 48]} />
+        <meshStandardMaterial color="#14171c" roughness={0.38} metalness={0.6} envMapIntensity={0.7} />
       </mesh>
       {/* A thin, quiet light line on the floor marks the presentation spot. */}
       <group ref={floor} position={[0, floorY + 0.004, 0]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -364,7 +351,7 @@ function VehicleModel({
           <meshBasicMaterial color={ACCENT_PINK} transparent opacity={0.95} />
         </mesh>
       </group>
-      <ContactShadows position={[0, floorY + 0.002, 0]} opacity={0.65} scale={9} blur={2.2} far={1.6} color="#000000" />
+      <ContactShadows position={[0, floorY + 0.002, 0]} opacity={0.65} scale={9} blur={2.2} far={1.6} resolution={256} color="#000000" />
       <pointLight ref={rimLight} position={[-4, 1.4, -3]} color={ACCENT_PINK} intensity={22} distance={14} />
       {!reducedMotion && (
         <Sparkles count={28} scale={[10, 3, 6]} position={[0, 0.8, 0]} size={1.4} speed={0.25} opacity={0.35} color="#dfe8ff" />
@@ -406,6 +393,16 @@ export function CarScene({ progress, rotating, reducedMotion, highlight, framing
   const [loaded, setLoaded] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
+  const holder = useRef<HTMLSpanElement>(null);
+  const [visible, setVisible] = useState(true);
+  // Stop drawing frames while the scene is scrolled out of view.
+  useEffect(() => {
+    const target = holder.current?.parentElement;
+    if (!target) return;
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { rootMargin: "120px" });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
 
   const markReady = useMemo(() => () => {
     setLoadError(null);
@@ -424,11 +421,13 @@ export function CarScene({ progress, rotating, reducedMotion, highlight, framing
 
   return (
     <>
+      <span ref={holder} style={{ display: "none" }} aria-hidden="true" />
       <Canvas
         className="scene-canvas"
+        frameloop={visible ? "always" : "never"}
         aria-hidden="true"
-        dpr={[1, 1.5]}
-        shadows
+        dpr={[1, 1.25]}
+        shadows="percentage"
         camera={{ position: [5.6, 1.9, 6.6], fov: 32, near: 0.1, far: 100 }}
         gl={{ antialias: true, alpha: false }}
         fallback={<p>This browser cannot display the 3D vehicle.</p>}
@@ -440,7 +439,7 @@ export function CarScene({ progress, rotating, reducedMotion, highlight, framing
           position={[5, 8, 5]}
           intensity={2.4}
           castShadow
-          shadow-mapSize={[2048, 2048]}
+          shadow-mapSize={[1024, 1024]}
           shadow-camera-left={-6}
           shadow-camera-right={6}
           shadow-camera-top={6}
@@ -449,7 +448,7 @@ export function CarScene({ progress, rotating, reducedMotion, highlight, framing
         />
         <spotLight position={[0, 9, 0]} angle={0.5} penumbra={1} intensity={30} color="#f0f3ff" />
         {/* Studio softboxes: they are never visible, but they are what paints the car's reflections. */}
-        <Environment resolution={256} environmentIntensity={0.9}>
+        <Environment resolution={128} environmentIntensity={0.9}>
           <Lightformer form="rect" color="#ffffff" intensity={4} position={[0, 6, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[12, 6, 1]} />
           <Lightformer form="rect" color="#f4f7ff" intensity={2.6} position={[-7, 2.5, 1]} rotation={[0, Math.PI / 2, 0]} scale={[9, 1.6, 1]} />
           <Lightformer form="rect" color="#f4f7ff" intensity={2.6} position={[7, 2.5, 1]} rotation={[0, -Math.PI / 2, 0]} scale={[9, 1.6, 1]} />

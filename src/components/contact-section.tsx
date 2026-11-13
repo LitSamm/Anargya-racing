@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useInView } from "framer-motion";
+import { useRef, useState, type FormEvent } from "react";
 import { Reveal } from "@/components/motion-kit";
 import { SpecCarView } from "@/components/spec-car-view";
 import { api } from "@/lib/api";
@@ -18,6 +19,9 @@ const topics = [
 export function ContactSection() {
   const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
   const [error, setError] = useState("");
+  const carRef = useRef<HTMLDivElement>(null);
+  // Only build the 3D scene once the section is near the viewport.
+  const nearby = useInView(carRef, { once: true, margin: "300px 0px" });
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -34,7 +38,7 @@ export function ContactSection() {
   }
 
   return <section className="contact-section" id="contact" aria-labelledby="contact-title">
-    <div className="contact-car" aria-hidden="true"><SpecCarView highlight="overview" /></div>
+    <div className="contact-car" ref={carRef} aria-hidden="true">{nearby && <SpecCarView highlight="overview" />}</div>
     <Reveal className="contact-card">
       <p className="page-eyebrow"><i className="eyebrow-dot" />Contact</p>
       <h2 id="contact-title">We’re here to listen.</h2>

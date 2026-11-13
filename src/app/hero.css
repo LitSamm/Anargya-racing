@@ -28,7 +28,7 @@
 
 /* Rounded corners site-wide (was square) */
 .button-primary,.button-secondary,.header-cta { border-radius:999px; }
-.featured-card,.advantage,.scope-card,.journey-form,.journey-draft,.sales-price-block,.specification-fact,.spec-card,.spec-part,.feature-copy,.stat { border-radius:18px; }
+.featured-card,.advantage,.scope-card,.journey-form,.journey-draft,.spec-card,.spec-part,.feature-copy,.stat { border-radius:18px; }
 .journey-form input,.journey-form textarea,.journey-draft textarea { border-radius:10px; }
 
 /* Hero v3: title bottom-left, actions bottom-right */
@@ -81,3 +81,21 @@
 /* Hero v6: a touch larger */
 .hero-banner .hero-banner-copy h1 { font-size:clamp(1.9rem,3.3vw,3.3rem); }
 @media (max-width:760px){ .hero-banner .hero-banner-copy h1 { font-size:clamp(1.6rem,7.6vw,2.3rem); } }
+
+/* Card padding: content no longer sits against the card edge */
+
+.sales-price-block { max-width:500px; padding:clamp(1.6rem,2.6vw,2.4rem) clamp(1.6rem,2.8vw,2.6rem); border:1px solid rgba(243,242,239,.24); border-radius:18px; background:rgba(8,10,13,.55); backdrop-filter:blur(6px); }
+.featured-card { padding:clamp(1.6rem,2.6vw,2.4rem) clamp(1.6rem,2.8vw,2.6rem); gap:.7rem; }
+.featured-card .hero-actions { margin-top:1.2rem; }
+.advantage,.scope-card { padding:clamp(1.6rem,2.4vw,2rem); }
+
+/* Chapter cards: even padding on every side, left and right variants alike */
+@media (min-width:681px){
+  .feature-panel .feature-copy,
+  .feature-panel[data-side="left"] .feature-copy,
+  .feature-panel[data-side="right"] .feature-copy { width:min(38%,470px); max-width:470px; padding:clamp(1.6rem,2.6vw,2.4rem) clamp(1.6rem,2.8vw,2.6rem); border-radius:18px; }
+  .feature-panel[data-side="left"] .feature-copy { background:linear-gradient(90deg,rgba(8,10,13,.84),rgba(8,10,13,.5)); }
+  .feature-panel[data-side="right"] .feature-copy { background:linear-gradient(270deg,rgba(8,10,13,.84),rgba(8,10,13,.5)); }
+}
+@media (max-width:680px){ .feature-panel .feature-copy, .feature-panel[data-side="right"] .feature-copy { padding:1.4rem 1.3rem 1.3rem; border-radius:18px; } }
+.specification-fact { max-width:420px; padding:clamp(1.5rem,2.4vw,2.2rem) clamp(1.5rem,2.6vw,2.4rem); border:1px solid rgba(243,242,239,.24); border-radius:18px; background:rgba(8,10,13,.55); backdrop-filter:blur(6px); }

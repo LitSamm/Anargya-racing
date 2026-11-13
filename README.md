@@ -2,7 +2,7 @@
 
 Website Anargya memperkenalkan konsep mobil listrik Formula Student untuk pelatihan pembalap dan riset kendaraan. Situs ini menjelaskan tujuan kendaraan, sistem yang dikembangkan, rencana penjualan untuk akademi balap di Jepang, serta konsep aplikasi telemetry.
 
-Harga kendaraan ¥6.627.281 adalah harga tetap. Volume dan jadwal di situs merupakan target dalam rencana proyek, bukan komitmen produksi. Spesifikasi performa kendaraan belum dipublikasikan sebagai data tervalidasi.
+Harga kendaraan ¥6.627.281 adalah harga kendaraan. Volume dan jadwal di situs merupakan target dalam rencana proyek, bukan komitmen produksi. Spesifikasi performa kendaraan belum dipublikasikan sebagai data tervalidasi.
 
 ## Isi situs
 
@@ -26,7 +26,7 @@ Pemilihan sistem mengubah sorotan komponen dan sudut kamera. Powertrain, inverte
 
 ### Informasi penjualan
 
-`/sales` menjelaskan arah penjualan yang direncanakan untuk Jepang, harga tetap per kendaraan (¥6.627.281), rencana ekspansi pasar, dan gagasan pilot untuk akademi. Angka serta tanggal di halaman ini merupakan asumsi atau target perencanaan. Harga final, spesifikasi, ketersediaan, dan ketentuan pembelian perlu dikonfirmasi melalui proposal atau perjanjian penjualan.
+`/sales` menjelaskan arah penjualan yang direncanakan untuk Jepang, harga per kendaraan (¥6.627.281), rencana ekspansi pasar, dan gagasan pilot untuk akademi. Angka serta tanggal di halaman ini merupakan asumsi atau target perencanaan. Harga final, spesifikasi, ketersediaan, dan ketentuan pembelian perlu dikonfirmasi melalui proposal atau perjanjian penjualan.
 
 ### Pratinjau live telemetry
 

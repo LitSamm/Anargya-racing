@@ -12,7 +12,7 @@ export function LoginForm() {
     setBusy(true); setError("");
     try {
       const { user } = await api<{ user: Me }>("/api/auth/login", { body: { email: String(data.get("email")), password: String(data.get("password")) } });
-      window.location.assign(user.role === "ADMIN" ? "/admin" : "/dashboard");
+      window.location.href = user.role === "ADMIN" ? "/admin" : "/dashboard";
     } catch (e) { setError((e as Error).message); setBusy(false); }
   }
   return <form className="app-card app-form app-login" onSubmit={submit}>

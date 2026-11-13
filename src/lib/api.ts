@@ -36,7 +36,7 @@ export function useMe(role?: Me["role"]) {
 
 export async function signOut() {
   await api("/api/auth/logout", { method: "POST", body: {} }).catch(() => undefined);
-  window.location.assign("/login");
+  window.location.href = "/login";
 }
 
 /** Fetches a list on mount and exposes a reload. */
